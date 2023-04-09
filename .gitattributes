@@ -1,0 +1,64 @@
+###############################################################################
+# Set default behavior to disable normalize line endings.
+###############################################################################
+* -text
+
+# enable normalization on the following file extensions
+*.asax text
+*.ascx text
+*.asmx text
+*.aspx text
+*.bat text
+*.cmd text
+*.config text
+*.config.transform text
+*.creole text
+*.cs text diff=csharp 
+*.cshtml text
+*.csproj text
+*.css text diff=css
+*.datasource text
+*.dcproj text
+*.disco text
+*.dockerignore text
+*.dtproj text
+*.dtsx text
+*.edmx text
+*.edmx.diagram text
+*.feature text
+*.gitattributes text
+*.gitignore text
+*.htm text diff=html
+*.html text diff=html
+*.js text
+*.json text
+*.map text
+*.Master text
+*.md text
+*.nuspec text
+*.ps1 text
+*.psd1 text
+*.psm1 text
+*.pubxml text
+*.rdl text
+*.scpf text
+*.settings text
+*.sln text
+*.sql text
+*.svcinfo text
+*.ts text
+*.tt text
+*.txt text
+*.wsdl text
+*.xml text
+*.yml text
+Dockerfile text
+Jenkinsfile text
+
+# disable line ending normalization on the following
+# RedGate Comparison options UTF-16 file genernated by SQL Source Control not happy when git messes with it
+**/ComparisonOptions.xml -text
+
+# ignore all nuget packages
+/packages/** -text
+
