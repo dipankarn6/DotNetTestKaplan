@@ -16,7 +16,17 @@
 
 1. Fix the following bugs in the REST API:
     * The web service call to http://localhost:49861/api/Orders/3/Summary `GET` fails
+     => Single() method was causing the issue, as there are multiple items, single was throwing error
+     => Fixed by using First(), FirstOrDefault() can also be used
     * Unable to add items to the order
+     => Fixed by removing the Quantity constraint 'CK_OrderItems_Quantity' 
+     => and Foreign key constraint 'FK_OrderItems_Products'
+
 2. Create a new resource to delete an Item from the order.
+
+=> api/Orders/{OrderId}, query param = line number, could be the product id as well.
+
 3. Change the OrderItems GET resource to return a 404 when the OrderID does not exist in the database and add a unit test for it.
+
+=> Done by sending a http response of not found
 4. Feel free to implement any changes/improvements you see fit.

@@ -7,5 +7,6 @@ namespace DotNetDeveloperTest.Services
     {
         Task<short> AddAsync(int orderID, OrderItemDTO item);
         OrderItemsDTO Get(int orderID);
+        int Delete(int orderID, short lineNumber);
     }
 }

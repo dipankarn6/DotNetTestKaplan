@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Results;
 
 namespace DotNetDeveloperTest.Services
 {
@@ -20,6 +22,10 @@ namespace DotNetDeveloperTest.Services
         {
             IEnumerable<OrderItem> orderItems = _db.OrderItems.Where(oi => oi.OrderID ==orderID);
 
+            if (orderItems.Count(oi => oi.OrderID == orderID) == 0)
+            {
+                throw new Exception(HttpStatusCode.NotFound.ToString());
+            }
             return new OrderItemsDTO()
             {
                 OrderID = orderID,
@@ -46,6 +52,7 @@ namespace DotNetDeveloperTest.Services
             {
                 OrderID = orderID,
                 LineNumber = lineNumber,
+                Quantity = item.Quantity,
                 Price = item.Price,
                 ProductID = item.ProductID,
                 StudentPersonID = item.StudentPersonID
@@ -54,6 +61,25 @@ namespace DotNetDeveloperTest.Services
             await _db.SaveChangesAsync();
 
             return lineNumber;
+        }
+
+        public int Delete(int OrderId, short LineNumber)
+        {
+            IEnumerable<OrderItem> orderItems = _db.OrderItems.Where(oi => oi.OrderID == OrderId);
+            if (orderItems.Count(item =>  item.LineNumber == LineNumber) == 0)
+            {
+                throw new ValidationException($"Item with LineNumber {LineNumber} is not available");
+            }
+            foreach (var item in orderItems)
+            {
+                if(item.LineNumber == LineNumber)
+                {
+                    _db.OrderItems.Remove(item);
+                }
+            }
+
+            _db.SaveChanges();
+            return LineNumber;
         }
 
         private TestDB _db;

@@ -47,7 +47,7 @@ namespace DotNetDeveloperTest.Services
                 summary.Totals.Tax = subTotal * TaxRate;
                 summary.Totals.Shipping = Shipping;
 
-                summary.OrderingPersonID = personIDs.Single();
+                summary.OrderingPersonID = personIDs.First();
 
                 summary.OrderPersonIDs = personIDs;
             }
